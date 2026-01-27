@@ -1,6 +1,6 @@
-# AeroBeat Tool Template
+# AeroBeat Tool - User Settings
 
-This is the official template for creating a **Tool** repository within the AeroBeat ecosystem.
+This is the official Tool for AeroBeat's support for persistent local user settings.
 
 A **Tool** is a reusable service or singleton manager (e.g., API Client, Analytics, Discord Integration). It is designed to be modular and plugged into an **Assembly**.
 
