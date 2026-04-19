@@ -1,7 +1,21 @@
+# Godot 4+ specific ignores
 .godot/
 .import/
 export_presets.cfg
-*.tmp
-*.pck
-*.zip
-.testbed/addons/
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# System specific
+.DS_Store
+Thumbs.db
+
+# GodotEnv package workbench
+.testbed/addons/*
+!.testbed/addons/.editorconfig
+.testbed/.addons/
