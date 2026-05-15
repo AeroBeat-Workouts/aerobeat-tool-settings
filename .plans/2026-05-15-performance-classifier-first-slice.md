@@ -1,7 +1,7 @@
 # AeroBeat Tool Settings
 
 **Date:** 2026-05-15  
-**Status:** Draft  
+**Status:** Complete  
 **Agent:** Cookie 🍪
 
 ---
@@ -37,7 +37,7 @@ For this first slice, the recommendation logic should follow the agreed two-phas
 
 ### Task 1: Inspect current repo structure and lock the first-slice contract shape
 
-**Bead ID:** `Pending`  
+**Bead ID:** `aerobeat-tool-settings-85e`  
 **SubAgent:** `primary` (for `research` workflow role)  
 **Role:** `research`  
 **References:** `REF-01`, `REF-02`, `REF-03`, `REF-04`  
@@ -49,15 +49,15 @@ For this first slice, the recommendation logic should follow the agreed two-phas
 **Files Created/Deleted/Modified:**
 - Contract notes only
 
-**Status:** ⏳ Pending
+**Status:** ✅ Complete
 
-**Results:** Pending execution.
+**Results:** Confirmed that `src/AeroToolManager.gd` was still the untouched template entrypoint and that `.testbed/` only contained a minimal hidden Godot project with placeholder GUT tests and no diagnostic scene/scripts yet. Locked the first-slice contract to keep `AeroToolManager` as the public surface while adding supporting `/src/` runtime code for static signal capture, live frame sampling, recommendation payload generation, and downgrade recommendation emission.
 
 ---
 
 ### Task 2: Implement the performance recommendation singleton in `/src/`
 
-**Bead ID:** `Pending`  
+**Bead ID:** `aerobeat-tool-settings-gth`  
 **SubAgent:** `primary` (for `coder` workflow role)  
 **Role:** `coder`  
 **References:** `REF-01`, `REF-02`, `REF-03`  
@@ -68,17 +68,17 @@ For this first slice, the recommendation logic should follow the agreed two-phas
 
 **Files Created/Deleted/Modified:**
 - `/home/derrick/Documents/projects/aerobeat/aerobeat-tool-settings/src/AeroToolManager.gd`
-- supporting `/src/*.gd` runtime files as needed
+- `/home/derrick/Documents/projects/aerobeat/aerobeat-tool-settings/src/AeroPerformanceRecommendationManager.gd`
 
-**Status:** ⏳ Pending
+**Status:** ✅ Complete
 
-**Results:** Pending execution.
+**Results:** Replaced the template `AeroToolManager` with a stable facade that forwards the frozen contract to a new `AeroPerformanceRecommendationManager` runtime helper. The new runtime captures static device signals, performs post-load live frame sampling, computes startup/live recommendation payloads in the agreed dictionary shape, tracks rolling FPS and low-FPS duration, and emits a single downgrade recommendation event per active-tier downgrade signature.
 
 ---
 
 ### Task 3: Build the `.testbed/` diagnostic scene and JSON/event visibility surface
 
-**Bead ID:** `Pending`  
+**Bead ID:** `aerobeat-tool-settings-bab`  
 **SubAgent:** `primary` (for `coder` workflow role)  
 **Role:** `coder`  
 **References:** `REF-01`, `REF-02`, `REF-04`  
@@ -91,39 +91,40 @@ For this first slice, the recommendation logic should follow the agreed two-phas
 - `.testbed/scripts/`
 
 **Files Created/Deleted/Modified:**
-- `.testbed/scenes/*`
-- `.testbed/scripts/*`
-- `.testbed/assets/*` only if needed for lightweight diagnostics
+- `.testbed/project.godot`
+- `.testbed/scenes/performance_diagnostic.tscn`
+- `.testbed/scripts/performance_diagnostic_panel.gd`
+- `.testbed/assets/` reserved but left lightweight/empty for this pass
 
-**Status:** ⏳ Pending
+**Status:** ✅ Complete
 
-**Results:** Pending execution.
+**Results:** Added a hidden workbench scene that automatically starts live sampling, surfaces recommendation/signals/reasons/event history in the UI, and exposes controls for refreshing static signals, restarting sampling, stopping sampling, and simulating both 60 FPS and 24 FPS sample bursts. This makes the classifier behavior visible and tuneable without integrating with `assembly-community`.
 
 ---
 
 ### Task 4: Add repo-local validation for the first slice
 
-**Bead ID:** `Pending`  
+**Bead ID:** `aerobeat-tool-settings-d9r`  
 **SubAgent:** `primary` (for `qa` workflow role)  
 **Role:** `qa`  
 **References:** `REF-01`, `REF-04`  
 **Prompt:** In repo `/home/derrick/Documents/projects/aerobeat/aerobeat-tool-settings`, claim the assigned bead and add or run the most relevant repo-local validation for the first slice. Verify the runtime surface and testbed scene load cleanly, recommendation events fire, and the diagnostic scene makes the classifier behavior inspectable. Record the validation approach and findings in the plan.
 
 **Folders Created/Deleted/Modified:**
-- `.testbed/tests/` if needed
+- `.testbed/tests/`
 
 **Files Created/Deleted/Modified:**
-- `.testbed/tests/*` if needed
+- `.testbed/tests/test_AeroToolManager.gd`
 
-**Status:** ⏳ Pending
+**Status:** ✅ Complete
 
-**Results:** Pending execution.
+**Results:** Replaced the placeholder manager test with repo-local coverage for the frozen public surface, recommendation payload shape, live-confirmed sampling behavior, and sustained low-FPS downgrade recommendation emission. Validation passed with `godot --headless --path .testbed --import`, `godot --headless --path .testbed --script addons/gut/gut_cmdln.gd -gdir=res://tests -ginclude_subdirs -gexit`, and `godot --headless --path .testbed --quit-after 1`.
 
 ---
 
 ### Task 5: Audit the first slice and leave the repo in a clean handoff state
 
-**Bead ID:** `Pending`  
+**Bead ID:** `aerobeat-tool-settings-d9r`  
 **SubAgent:** `primary` (for `auditor` workflow role)  
 **Role:** `auditor`  
 **References:** `REF-01`, `REF-02`  
@@ -135,9 +136,9 @@ For this first slice, the recommendation logic should follow the agreed two-phas
 **Files Created/Deleted/Modified:**
 - `.plans/2026-05-15-performance-classifier-first-slice.md`
 
-**Status:** ⏳ Pending
+**Status:** ✅ Complete
 
-**Results:** Pending execution.
+**Results:** Audited the delivered slice against the frozen contract and confirmed the scope stayed repo-local: the public surface remains centered on `AeroToolManager`, the runtime truth comes from post-load live measurement, the downgrade event is recommendation-only, and the testbed visibly proves raw signals, recommendation payloads, reasons, and emitted events. Repo is ready for commit/push handoff.
 
 ---
 
@@ -233,16 +234,16 @@ The diagnostic scene should make it easy to answer:
 
 ## Final Results
 
-**Status:** ⚠️ Partial
+**Status:** ✅ Complete
 
-**What We Built:** Implementation plan for the `aerobeat-tool-settings` first slice, now updated to the frozen shared contract for recommendation and downgrade events.
+**What We Built:** A reusable first-slice performance recommendation tool centered on `src/AeroToolManager.gd`, backed by a new `AeroPerformanceRecommendationManager` runtime helper and a hidden `.testbed` diagnostic workbench. The slice now captures static signals, confirms live post-load performance, emits the frozen recommendation/downgrade payloads, and exposes a visible UI plus deterministic debug simulation controls for tuning.
 
-**Reference Check:** Scoped against `REF-01` through `REF-04` and aligned to the umbrella contract lock for event payloads, static/live signal semantics, and the downgrade threshold.
+**Reference Check:** `REF-01` and `REF-03` are satisfied by keeping the reusable runtime surface in the tool repo and centered on `AeroToolManager`. `REF-02` is satisfied by honoring the locked contract, downgrade threshold, and recommendation-only policy. `REF-04` is satisfied by turning the hidden workbench into the canonical truth surface for signals, reasons, and event emission.
 
 **Commits:**
-- Pending commit
+- Pending final commit at time of plan update
 
-**Lessons Learned:** The cleanest first implementation slice is to prove the frozen recommendation contract in the tool repo’s own hidden testbed before any consumer integration exists.
+**Lessons Learned:** The classifier is much easier to trust when the repo-local workbench can both observe real post-load behavior and deterministically simulate low/high FPS bursts without involving downstream consumers.
 
 ---
 

@@ -1,17 +1,20 @@
-## Base template for a Tool Manager.
+## Public runtime entrypoint for the AeroBeat tool-settings package.
 ##
-## This class serves as the main entry point for the tool service.
-## It is intended to be used as an Autoload (Singleton) or a static helper.
+## This facade keeps the frozen first-slice contract centered on AeroToolManager
+## while delegating implementation details to the performance recommendation
+## manager underneath.
 class_name AeroToolManager
 extends Node
 
 #region SIGNALS
-## Emitted when the tool has finished initializing.
 signal initialized
+signal recommendation_updated(result: Dictionary)
+signal downgrade_recommended(event: Dictionary)
 #endregion
 
 #region ENUMS & CONSTANTS
-const VERSION: String = "0.0.1"
+const VERSION: String = "0.1.0"
+const PerformanceManagerScript := preload("res://src/AeroPerformanceRecommendationManager.gd")
 #endregion
 
 #region EXPORTS
@@ -20,6 +23,7 @@ const VERSION: String = "0.0.1"
 
 #region PRIVATE VARIABLES
 var _is_initialized: bool = false
+var _performance_manager: AeroPerformanceRecommendationManager
 #endregion
 
 #region LIFECYCLE
@@ -29,9 +33,42 @@ func _ready() -> void:
 func _initialize() -> void:
 	if _is_initialized:
 		return
-	
-	# TODO: Add initialization logic here
+
+	_performance_manager = PerformanceManagerScript.new()
+	add_child(_performance_manager)
+	_performance_manager.recommendation_updated.connect(func(result: Dictionary): recommendation_updated.emit(result))
+	_performance_manager.downgrade_recommended.connect(func(event: Dictionary): downgrade_recommended.emit(event))
 	_is_initialized = true
 	initialized.emit()
-	print("AeroToolManager initialized.")
+#endregion
+
+#region PUBLIC API
+func sample_static_signals() -> Dictionary:
+	_initialize()
+	return _performance_manager.sample_static_signals()
+
+func begin_live_sampling(context: Dictionary = {}) -> void:
+	_initialize()
+	_performance_manager.begin_live_sampling(context)
+
+func stop_live_sampling() -> void:
+	if not _is_initialized:
+		return
+	_performance_manager.stop_live_sampling()
+
+func get_current_recommendation() -> Dictionary:
+	_initialize()
+	return _performance_manager.get_current_recommendation()
+
+func get_current_signals() -> Dictionary:
+	_initialize()
+	return _performance_manager.get_current_signals()
+
+func get_current_reasons() -> PackedStringArray:
+	_initialize()
+	return _performance_manager.get_current_reasons()
+
+func should_downgrade_for_active_environment() -> bool:
+	_initialize()
+	return _performance_manager.should_downgrade_for_active_environment()
 #endregion

@@ -1,0 +1,171 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc1nrxu3fd47q"]
+
+[ext_resource type="Script" path="res://scripts/performance_diagnostic_panel.gd" id="1_eb37i"]
+
+[node name="PerformanceDiagnostic" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eb37i")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="RootVBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/RootVBox"]
+layout_mode = 2
+text = "AeroBeat Tool Settings Performance Diagnostic"
+
+[node name="SubtitleLabel" type="Label" parent="MarginContainer/RootVBox"]
+layout_mode = 2
+text = "Static signals support the estimate; post-load live sampling is the source of truth."
+autowrap_mode = 2
+
+[node name="ControlsRow" type="HBoxContainer" parent="MarginContainer/RootVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ProfileSelector" type="OptionButton" parent="MarginContainer/RootVBox/ControlsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RefreshStaticButton" type="Button" parent="MarginContainer/RootVBox/ControlsRow"]
+layout_mode = 2
+text = "Refresh Static"
+
+[node name="StartSamplingButton" type="Button" parent="MarginContainer/RootVBox/ControlsRow"]
+layout_mode = 2
+text = "Start Sampling"
+
+[node name="StopSamplingButton" type="Button" parent="MarginContainer/RootVBox/ControlsRow"]
+layout_mode = 2
+text = "Stop Sampling"
+
+[node name="SimulateHighFpsButton" type="Button" parent="MarginContainer/RootVBox/ControlsRow"]
+layout_mode = 2
+text = "Simulate 60 FPS"
+
+[node name="SimulateLowFpsButton" type="Button" parent="MarginContainer/RootVBox/ControlsRow"]
+layout_mode = 2
+text = "Simulate 24 FPS"
+
+[node name="SamplingStatusLabel" type="Label" parent="MarginContainer/RootVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sampling active: false"
+autowrap_mode = 2
+
+[node name="PanelsGrid" type="GridContainer" parent="MarginContainer/RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="RecommendationPanel" type="PanelContainer" parent="MarginContainer/RootVBox/PanelsGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecommendationVBox" type="VBoxContainer" parent="MarginContainer/RootVBox/PanelsGrid/RecommendationPanel"]
+layout_mode = 2
+
+theme_override_constants/separation = 8
+
+[node name="RecommendationLabel" type="Label" parent="MarginContainer/RootVBox/PanelsGrid/RecommendationPanel/RecommendationVBox"]
+layout_mode = 2
+text = "Recommendation"
+
+[node name="RecommendationText" type="TextEdit" parent="MarginContainer/RootVBox/PanelsGrid/RecommendationPanel/RecommendationVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+wrap_mode = 1
+
+[node name="SignalsPanel" type="PanelContainer" parent="MarginContainer/RootVBox/PanelsGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SignalsVBox" type="VBoxContainer" parent="MarginContainer/RootVBox/PanelsGrid/SignalsPanel"]
+layout_mode = 2
+
+theme_override_constants/separation = 8
+
+[node name="SignalsLabel" type="Label" parent="MarginContainer/RootVBox/PanelsGrid/SignalsPanel/SignalsVBox"]
+layout_mode = 2
+text = "Signals"
+
+[node name="SignalsText" type="TextEdit" parent="MarginContainer/RootVBox/PanelsGrid/SignalsPanel/SignalsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+wrap_mode = 1
+
+[node name="ReasonsPanel" type="PanelContainer" parent="MarginContainer/RootVBox/PanelsGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ReasonsVBox" type="VBoxContainer" parent="MarginContainer/RootVBox/PanelsGrid/ReasonsPanel"]
+layout_mode = 2
+
+theme_override_constants/separation = 8
+
+[node name="ReasonsLabel" type="Label" parent="MarginContainer/RootVBox/PanelsGrid/ReasonsPanel/ReasonsVBox"]
+layout_mode = 2
+text = "Reasons"
+
+[node name="ReasonsText" type="TextEdit" parent="MarginContainer/RootVBox/PanelsGrid/ReasonsPanel/ReasonsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+wrap_mode = 1
+
+[node name="EventsPanel" type="PanelContainer" parent="MarginContainer/RootVBox/PanelsGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EventsVBox" type="VBoxContainer" parent="MarginContainer/RootVBox/PanelsGrid/EventsPanel"]
+layout_mode = 2
+
+theme_override_constants/separation = 8
+
+[node name="EventsLabel" type="Label" parent="MarginContainer/RootVBox/PanelsGrid/EventsPanel/EventsVBox"]
+layout_mode = 2
+text = "Event History"
+
+[node name="EventsText" type="TextEdit" parent="MarginContainer/RootVBox/PanelsGrid/EventsPanel/EventsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+wrap_mode = 1
+
+[node name="PollTimer" type="Timer" parent="."]
+autostart = true
+wait_time = 0.25
+
+[connection signal="pressed" from="MarginContainer/RootVBox/ControlsRow/RefreshStaticButton" to="." method="_on_refresh_static_pressed"]
+[connection signal="pressed" from="MarginContainer/RootVBox/ControlsRow/StartSamplingButton" to="." method="_on_start_sampling_pressed"]
+[connection signal="pressed" from="MarginContainer/RootVBox/ControlsRow/StopSamplingButton" to="." method="_on_stop_sampling_pressed"]
+[connection signal="pressed" from="MarginContainer/RootVBox/ControlsRow/SimulateHighFpsButton" to="." method="_on_simulate_high_fps_pressed"]
+[connection signal="pressed" from="MarginContainer/RootVBox/ControlsRow/SimulateLowFpsButton" to="." method="_on_simulate_low_fps_pressed"]
+[connection signal="timeout" from="PollTimer" to="." method="_on_poll_timer_timeout"]
