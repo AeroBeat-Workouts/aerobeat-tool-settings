@@ -1,6 +1,12 @@
 {
   "$schema": "https://chickensoft.games/schemas/addons.schema.json",
   "addons": {
+    // Install this repo into the hidden workbench the same way a consumer does.
+    "aerobeat-tool-settings": {
+      "url": "..",
+      "source": "symlink",
+      "subfolder": "/"
+    },
     // Batch 1 pins the foundational core contract for tool work.
     "aerobeat-core": {
       "url": "git@github.com:AeroBeat-Workouts/aerobeat-core.git",
