@@ -11,7 +11,7 @@ const DEBUG_SAMPLE_COUNT := 96
 @onready var reasons_text: TextEdit = %ReasonsText
 @onready var events_text: TextEdit = %EventsText
 
-var _manager: AeroToolManager
+var _manager: AeroSettingsManager
 var _event_history: Array[String] = []
 
 func _ready() -> void:
@@ -23,11 +23,11 @@ func _ready() -> void:
 	_refresh_view()
 
 func _ensure_manager() -> void:
-	if has_node("AeroToolManager"):
-		_manager = $AeroToolManager
+	if has_node("AeroSettingsManager"):
+		_manager = $AeroSettingsManager
 		return
-	_manager = AeroToolManager.new()
-	_manager.name = "AeroToolManager"
+	_manager = AeroSettingsManager.new()
+	_manager.name = "AeroSettingsManager"
 	add_child(_manager)
 
 func _connect_manager_events() -> void:

@@ -1,9 +1,9 @@
 extends GutTest
 
-var _manager: AeroToolManager
+var _manager: AeroSettingsManager
 
 func before_each() -> void:
-	_manager = AeroToolManager.new()
+	_manager = AeroSettingsManager.new()
 	add_child(_manager)
 	_manager._initialize()
 
@@ -11,8 +11,8 @@ func after_each() -> void:
 	if is_instance_valid(_manager):
 		_manager.free()
 
-func test_tool_manager_exposes_frozen_first_slice_surface() -> void:
-	assert_eq(AeroToolManager.VERSION, "0.1.0", "Version should reflect the first implementation slice")
+func test_settings_manager_exposes_frozen_first_slice_surface() -> void:
+	assert_eq(AeroSettingsManager.VERSION, "0.1.0", "Version should reflect the first implementation slice")
 	assert_true(_manager.has_signal("recommendation_updated"), "Public facade should expose recommendation_updated")
 	assert_true(_manager.has_signal("downgrade_recommended"), "Public facade should expose downgrade_recommended")
 	assert_true(_manager.has_method("sample_static_signals"), "Public facade should expose sample_static_signals")

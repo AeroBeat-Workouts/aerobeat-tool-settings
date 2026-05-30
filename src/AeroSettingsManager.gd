@@ -1,9 +1,9 @@
 ## Public runtime entrypoint for the AeroBeat tool-settings package.
 ##
-## This facade keeps the frozen first-slice contract centered on AeroToolManager
+## This facade keeps the frozen first-slice contract centered on AeroSettingsManager
 ## while delegating implementation details to the performance recommendation
 ## manager underneath.
-class_name AeroToolManager
+class_name AeroSettingsManager
 extends Node
 
 #region SIGNALS
@@ -14,7 +14,7 @@ signal downgrade_recommended(event: Dictionary)
 
 #region ENUMS & CONSTANTS
 const VERSION: String = "0.1.0"
-const PerformanceManagerScript := preload("res://src/AeroPerformanceRecommendationManager.gd")
+const PerformanceManagerScript := preload("AeroPerformanceRecommendationManager.gd")
 #endregion
 
 #region EXPORTS
